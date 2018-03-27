@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>login demo</title>
+<script type="text/javascript" src="jquery.1.11.3.min.js"></script>
+</head>
+<body>
+	<form action="" method="post">
+		手机号<input name="phoneNo" type="text"></input> 密码<input name="password"
+			type="password"></input> <a onclick="login()">登录</a>
+	</form>
+</body>
+<script type="text/javascript">
+function login(){
+	$.ajax({
+
+        url : "http://192.168.50.182:80/services/login/loginMember",
+
+        type : "post",
+
+        data : {
+            phoneNo : $("[name=phoneNo]").val(),
+            password : $("[name=password]").val()
+        },
+
+        dateType : "json",
+
+        success : function(data) {
+
+            alert(data);
+
+        }
+
+    });
+	
+}
+	
+</script>
+</html>

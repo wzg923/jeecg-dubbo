@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <bean id="fastDFSFactory" class="com.anniweiya.fastdfs.FastDFSTemplateFactory" init-method="init">
+    <!--连接超时的时限，单位为秒-->
+    <property name="g_connect_timeout" value="${fastdfs.connect_timeout_in_seconds}"/>
+    <!--网络超时的时限，单位为秒-->
+    <property name="g_network_timeout" value="${fastdfs.network_timeout_in_seconds}"/>
+    <!--防盗链配置-->
+    <property name="g_anti_steal_token" value="${fastdfs.http_anti_steal_token}"/>
+    <property name="g_secret_key" value="${fastdfs.http_secret_key}"/>
+    <property name="poolConfig">
+      <bean class="com.anniweiya.fastdfs.pool.PoolConfig">
+        <!--池的大小-->
+        <property name="maxTotal" value="100"/>
+        <!--连接池中最大空闲的连接数-->
+        <property name="maxIdle" value="10"/>
+      </bean>
+    </property>
+    <!--tracker的配置 ","逗号分隔-->
+    <property name="tracker_servers" value="${fastdfs.tracker_servers}"/>
+    <!--HTTP访问服务的端口号-->
+    <property name="g_tracker_http_port" value="${fastdfs.http_tracker_http_port}"/>
+    <!--nginx的对外访问地址，如果没有端口号，将取g_tracker_http_port配置的端口号 ","逗号分隔-->
+    <property name="nginx_address" value="${fastdfs.nginx_address}"/>
+    
+    <property name="protocol" value="${fastdfs.protocol}"></property>
+    <!-- <property name="sepapator" value="/"></property> -->
+  </bean>
+
+  <!--注入模板类-->
+  <bean id="fastDFSTemplate" class="com.anniweiya.fastdfs.FastDFSTemplate">
+    <constructor-arg ref="fastDFSFactory"/>
+  </bean>
+
+</beans>

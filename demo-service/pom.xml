@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.guoyicap</groupId>
+		<artifactId>dubbo-core-parent</artifactId>
+		<version>1.0.1-SNAPSHOT</version>
+	</parent>
+	<groupId>com.guoyicap</groupId>
+	<artifactId>demo-service</artifactId>
+	<packaging>pom</packaging>
+	<name>${project.artifactId}</name>
+	<description>The demo module of dubbo project</description>
+	<version>1.0.0-SNAPSHOT</version>
+	<properties>
+		<skip_maven_deploy>false</skip_maven_deploy>
+	</properties>
+	<modules>
+		<module>demo-service-api</module>
+		<module>demo-service-provider</module>
+		<!-- <module>dubbo-service-consumer</module> -->
+		<!-- <module>dubbo-service-core</module> -->
+	</modules>
+	
+	<repositories>
+        
+        <!-- 本地maven 私服 -->
+        <repository>
+            <id>maven-central</id>
+            <name>maven-central</name>
+            <url>http://192.168.29.119:8081/nexus/content/repositories/central/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>hosted-snapshots</id>
+            <name>maven-central</name>
+            <url>http://192.168.29.119:8081/nexus/content/repositories/hosted-snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>hosted-releases</id>
+            <name>maven-central</name>
+            <url>http://192.168.29.119:8081/nexus/content/repositories/hosted-releases/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+        <!-- 本地maven 私服 -->
+    </repositories>
+    <!-- maven 私服 发布 -->
+    <distributionManagement>
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <name>Nexus Snapshot</name>
+            <url>http://192.168.29.119:8081/nexus/content/repositories/hosted-snapshots/</url>
+        </snapshotRepository>
+        <repository>
+            <id>nexus-releases</id>
+            <name>Nexus Sites</name>
+            <url>http://192.168.29.119:8081/nexus/content/repositories/hosted-releases/</url>
+        </repository>
+    </distributionManagement>
+    <!-- maven 私服 发布 -->
+</project>

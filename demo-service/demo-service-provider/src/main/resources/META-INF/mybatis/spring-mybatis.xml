@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+           http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
+           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd"
+	default-autowire="byName" default-lazy-init="false">
+	
+	
+
+	
+	<!-- Activates annotation-based bean configuration -->  
+    <context:annotation-config /> 
+    
+	<!-- 自动扫描dao和service包(自动注入) -->
+	<context:component-scan base-package="com.guoyicap.*.mapper.*" />
+	<context:component-scan base-package="com.guoyicap.*.service.*" />
+
+	<!-- 加载service,此时要排除要controller,因为controller已经spring-mvc中加载过了 -->
+	<!-- <context:component-scan base-package="com.guoyicap.*">
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan> -->
+
+	<!-- 引入属性文件 -->
+	<!-- <context:property-placeholder location="classpath:/META-INF/dbconfig.properties" /> -->
+	<!-- 引入配置文件 -->  
+    <!-- <bean id="propertyConfigurer"  
+        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">  
+        <property name="location" value="classpath:dbconfig.properties" />  
+    </bean> --> 
+	
+	<!-- 配置数据源1 -->
+    <bean name="dataSource_mybatis" class="com.alibaba.druid.pool.DruidDataSource"
+        init-method="init" destroy-method="close">
+
+<!--                 <property name="url" value="jdbc:mysql://192.168.50.184:3306/ldcar_jeecg?characterEncoding=UTF-8" />
+ -->        
+        <property name="url" value="${env.jdbc.url.default}" />
+        <property name="username" value="${env.jdbc.username.default}" />
+        <property name="password" value="${env.jdbc.password.default}" />
+        <!-- 初始化连接大小 -->
+        <property name="initialSize" value="0" />
+        <!-- 连接池最大使用连接数量 -->
+        <property name="maxActive" value="50" />
+        <!-- 连接池最大空闲 -->
+        <property name="maxIdle" value="20" />
+        <!-- 连接池最小空闲 -->
+        <property name="minIdle" value="1" />
+        <!-- 获取连接最大等待时间 -->
+        <property name="maxWait" value="60000" />
+        <property name="poolPreparedStatements" value="true" /> 
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="33" />
+        <property name="validationQuery" value="SELECT 1 " />
+        <property name="testOnBorrow" value="false" />
+        <property name="testOnReturn" value="false" />
+        <property name="testWhileIdle" value="true" />
+
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 1000-->
+        <property name="timeBetweenEvictionRunsMillis" value="1000" />
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒  5分钟 -->
+        <property name="minEvictableIdleTimeMillis" value="300000" />
+
+        <!-- 打开removeAbandoned功能 -->
+        <property name="removeAbandoned" value="true" />
+        <!-- 14400秒，也就是240分钟 -->
+        <property name="removeAbandonedTimeout" value="14400" />
+        <!-- 关闭abanded连接时输出错误日志 -->
+        <property name="logAbandoned" value="true" />
+
+        <!-- 开启Druid的监控统计功能 -->
+        <!-- <property name="filters" value="stat" /> -->
+        <!--<property name="filters" value="mergeStat" /> -->
+        <property name="proxyFilters">
+			<list>
+				<ref bean="statfilter" />
+				<ref bean="logFilter" />
+			</list>
+		</property>
+        <!-- Oracle连接是获取字段注释 -->
+        <property name="connectProperties">
+            <props>
+                <prop key="remarksReporting">true</prop>
+            </props>
+        </property>
+    </bean>
+    
+    
+     <!-- 慢SQL记录 *start* -->
+    <bean id="statfilter" class="com.alibaba.druid.filter.stat.StatFilter">
+        <!-- 开启合并sql -->
+        <property name="mergeSql" value="true" />
+        <!-- 开启慢查询语句,1秒 -->
+        <property name="slowSqlMillis" value="1000" />
+        <property name="logSlowSql" value="true" />
+    </bean>
+
+    <bean id="logFilter" class="com.alibaba.druid.filter.logging.Log4jFilter">
+        <!-- <property name="resultSetLogEnabled" value="false" /> -->
+        <!-- <property name="statementExecutableSqlLogEnable" value="true" /> -->
+    </bean>
+    <!-- 慢SQL记录  *end* -->
+    
+	
+	<!-- 数据源集合 -->
+	<!-- <bean id="dataSource"
+		class="com.guoyicap.core.extend.datasource.DynamicDataSource">
+		<property name="targetDataSources">
+			<map key-type="com.guoyicap.core.extend.datasource.DataSourceType">
+				<entry key="dataSource_default" value-ref="dataSource_default" />
+				<entry key="dataSource2" value-ref="dataSource2" />
+				<entry key="mapdataSource" value-ref="mapdataSource" />
+			</map>
+		</property>
+		<property name="defaultTargetDataSource" ref="dataSource_default" />
+	</bean> -->
+	
+
+
+	<!-- JDBC配置 -->
+	<!-- <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+	</bean> -->
+
+	<!-- JDBC配置 -->
+	<!-- <bean id="namedParameterJdbcTemplate"
+		class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+		<constructor-arg ref="dataSource" />
+	</bean> -->
+
+	
+
+	<!-- JSR303 Validator定义 -->
+	<!-- <bean id="validator"
+		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" /> -->
+		
+		
+		
+	<!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->  
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">  
+        <property name="dataSource" ref="dataSource_mybatis" />  
+        
+        <!-- 自动扫描mapping.xml文件 -->  
+        <property name="mapperLocations" value="classpath:META-INF/mapping/*/*.xml"></property>  
+    </bean>
+  
+    <!-- DAO接口所在包名，Spring会自动查找其下的类 -->  
+   <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">  
+        <property name="basePackage" value="com.guoyicap.dizhiya.mapper" />  
+        <!-- <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property> -->  
+    </bean>
+    
+    
+    <!-- 配置事物管理器，在*ServiceImpl里写@Transactional就可以启用事物管理 -->
+    <tx:annotation-driven transaction-manager="transactionManager_mybatis" />
+    <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->  
+    <bean id="transactionManager_mybatis"
+        class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
+        <property name="dataSource" ref="dataSource_mybatis" />  
+    </bean>
+    
+    
+    <!-- AOP配置事物 -->  
+    <!-- <tx:advice id="transactionAdvice" transaction-manager="transactionManager_2">  
+        <tx:attributes>
+            <tx:method name="find*" read-only="true" propagation="REQUIRED" />  
+            <tx:method name="search*" read-only="true" propagation="REQUIRED" />
+            <tx:method name="select*" read-only="true" propagation="REQUIRED" /> 
+            <tx:method name="query*" read-only="true" propagation="REQUIRED" />  
+            <tx:method name="delete*"  propagation="REQUIRED" />  
+            <tx:method name="update*" propagation="REQUIRED" />  
+            <tx:method name="insert*" propagation="REQUIRED" />
+            <tx:method name="save*" propagation="REQUIRED" />
+            <tx:method name="*" propagation="REQUIRED" />  
+        </tx:attributes>  
+    </tx:advice>  --> 
+      
+    <!-- 配置AOP切面 -->  
+    <!-- <aop:config>  
+        <aop:pointcut id="transactionPointcut" expression="execution(* com.guoyicap..service.*.*(..))"/>  
+        <aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice"/>  
+    </aop:config>  -->
+
+</beans>
