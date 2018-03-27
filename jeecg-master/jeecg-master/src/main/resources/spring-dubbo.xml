@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!-- <dubbo:application name="jeecg-admin" owner="programmer" organization="dubbox" /> -->
+    
+
+    <!-- <dubbo:registry client="zkclient"/> -->
+    <!-- 开发过程中，可以只订阅服务，不注册服务        【只注册，不订阅    subscribe="false"】-->
+    <!-- <dubbo:registry address="zookeeper://192.168.29.100:2181" register="false" /> -->
+    <!-- 关闭所有服务的启动时检查 -->
+    <!-- <dubbo:registry check="false" /> -->
+    <dubbo:registry register="true" subscribe="true"/>
+    
+    <!-- 集群模式配置  -->
+    <!-- <dubbo:service cluster="failover" /> -->
+
+    <!--uncomment this if you want to test dubbo's monitor-->
+    <!--<dubbo:monitor protocol="registry"/>-->
+
+    <!-- here we demonstrate both annotation-based and xml-based configs -->
+    <dubbo:annotation package="com.guoyidzy.demo" />
+    <dubbo:protocol name="rmi" port="1099" serialization="hessian2" dispatcher="message" threadpool="fixed" threads="100" accesslog="false" accepts="10000"/>
+    <dubbo:protocol name="dubbo" port="20881" serialization="kryo" dispatcher="message" threadpool="fixed" threads="100"/>
+    <!--<dubbo:protocol name="dubbo" serialization="fst" optimizer="com.alibaba.dubbo.demo.SerializationOptimizerImpl"/>-->
+
+    <!--<dubbo:protocol name="dubbo" serialization="nativejava"/>-->
+    <!--<dubbo:protocol name="dubbo" serialization="hessian2"/>-->
+    <!--<dubbo:protocol name="dubbo" serialization="fastjson"/>-->
+    <!--<dubbo:protocol name="dubbo" serialization="dubbo"/>-->
+
+
+    <!--TODO according to the spring convention, we should use something like keep-alive-->
+    <!-- use netty server -->
+    <!--<dubbo:protocol name="rest" port="8888" keepalive="true" server="netty" iothreads="5" threads="100" contextpath="services"/>-->
+    <!-- <dubbo:protocol name="dubbo" port="9090" server="netty" client="netty" codec="dubbo" serialization="hessian2" charset="UTF-8" threadpool="fixed" threads="100" queues="0" iothreads="9" buffer="8192" accepts="1000" payload="8388608" /> -->
+    <!-- use tjws server -->
+    <!--<dubbo:protocol name="rest" port="8888" server="tjws" contextpath="services"/>-->
+
+    <!-- use tomcat server -->
+    <!-- <dubbo:protocol name="rest" port="80" threads="500" contextpath="services" server="servlet" accepts="500"/> -->
+
+    <!-- use the external tomcat or other server with the servlet approach; the port and contextpath must be exactly the same as those in external server -->
+    <!-- <dubbo:protocol name="rest" port="8888" contextpath="services" server="servlet"/> -->
+
+    <!-- <dubbo:protocol name="http" port="8889"/>
+    <dubbo:protocol name="hessian" port="8890"/>
+    <dubbo:protocol name="webservice" port="8892"/> -->
+    
+    <!--  本地调用，使用了Injvm协议，是一个伪协议，它不开启端口，不发起远程调用，只在JVM内直接关联，但执行Dubbo的Filter链。-->
+    <!--  从 dubbo 2.2.0 开始，每个服务默认都会在本地暴露；在引用服务的时候，默认优先引用本地服务；如果希望引用远程服务可以使用一下配置强制引用远程服务 dubbo:reference ... scope="remote" -->
+    <dubbo:protocol name="injvm" />
+    
+   <dubbo:reference id="demoService" interface="com.guoyidzy.demo.service.DemoService" group="guoyiDemo"  version="1.0.0" protocol="dubbo"/>
+</beans>

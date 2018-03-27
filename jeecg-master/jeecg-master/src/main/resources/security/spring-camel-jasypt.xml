@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans >
+           
+<!-- define the jasypt properties parser with the given password to be used -->
+<bean id="jasypt" class="org.apache.camel.component.jasypt.JasyptPropertiesParser">
+    <!-- password is mandatory, you can prefix it with sysenv: or sys: to indicate it should use
+         an OS environment or JVM system property value, so you dont have the master password defined here -->
+    <property name="password" value="qianba.key"/>
+</bean>
+  
+<camelContext xmlns="http://camel.apache.org/schema/spring">
+    <!-- define the camel properties placeholder, and let it leverage jasypt -->
+    <propertyPlaceholder id="properties"
+                         location="classpath:security/security.properties"
+                         propertiesParserRef="jasypt"/>
+    <route>
+        <from uri="direct:start"/>
+        <to uri="{{cool.result}}"/>
+    </route>
+</camelContext>
+</beans>
