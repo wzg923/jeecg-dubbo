@@ -153,7 +153,7 @@
 		<guice_version>3.0</guice_version>
 		<cglib_version>2.2</cglib_version>
 		<webx_version>3.0.8</webx_version>
-		<jackson_version>2.3.3</jackson_version>
+		<jackson_version>2.10.0</jackson_version>
 		<logback_version>1.0.7</logback_version>
 		<easymock_version>3.0</easymock_version>
 		<jmockit_version>0.999.8</jmockit_version>
