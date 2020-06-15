@@ -21,7 +21,7 @@
 		<hibernate.version>4.3.9.Final</hibernate.version>
 		<hibernate-common-annotations.version>4.0.5.Final</hibernate-common-annotations.version>
         <hibernate-jpa.version>1.0.0.Final</hibernate-jpa.version>
-        <hibernate-validator.version>4.2.0.Final</hibernate-validator.version>
+        <hibernate-validator.version>6.1.5.Final</hibernate-validator.version>
         <!-- 工具包 -->
         <!-- json start -->
         <jackson.version>1.8.4</jackson.version>
