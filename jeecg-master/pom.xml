@@ -114,7 +114,7 @@
 		<!-- minidao end -->
 		<spring-data-redis.version>1.7.5.RELEASE</spring-data-redis.version>
 		<jedis.version>2.8.1</jedis.version>
-		<org.quartz.version>2.2.2</org.quartz.version>
+		<org.quartz.version>2.3.2</org.quartz.version>
 		<antlr.version>3.3</antlr.version>
 		<!-- 数据库组件包 _start -->
 		<proxool.version>0.9.1</proxool.version>
