@@ -60,7 +60,7 @@
         <commons-dbcp.version>1.4</commons-dbcp.version>
         <druid.version>1.0.26</druid.version>
         <ojdbc6.version>1.0.0</ojdbc6.version>
-        <mysql.version>5.1.30</mysql.version>
+        <mysql.version>8.0.16</mysql.version>
         <!-- 辅助依赖包 -->
         <cglib.version>2.2</cglib.version>
         <aspectj.version>1.6.9</aspectj.version>
