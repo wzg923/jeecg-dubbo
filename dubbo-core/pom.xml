@@ -51,7 +51,7 @@
         <commons-logging-api.version>1.1</commons-logging-api.version>
         <commons-validator.version>1.3.1</commons-validator.version>
         
-        <org.quartz.version>2.2.2</org.quartz.version>
+        <org.quartz.version>2.3.2</org.quartz.version>
         <freemarker.version>2.3.25-incubating</freemarker.version>
         <!-- 数据库组件包 _start -->
         <proxool.version>0.9.1</proxool.version>
