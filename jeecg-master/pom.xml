@@ -645,7 +645,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.7</version>
+			<version>4.13.1</version>
 		</dependency>
 		<!-- guava -->
 		<dependency>
@@ -1530,7 +1530,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.7</version>
+			<version>4.13.1</version>
 		</dependency>
 		<!-- guava -->
 		<dependency>
