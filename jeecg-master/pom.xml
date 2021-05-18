@@ -123,7 +123,7 @@
 		<dom4j.version>1.6.1</dom4j.version>
 		<cglib.version>2.2</cglib.version>
 		<aspectj.version>1.6.9</aspectj.version>
-		<xstream.version>1.4.4</xstream.version>
+		<xstream.version>1.4.17</xstream.version>
 		
 		<!-- rabbitmq -->
         <rabbitmq.amqp-client.version>4.0.2</rabbitmq.amqp-client.version>
