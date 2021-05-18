@@ -96,7 +96,7 @@
         <spring-rabbit.version>1.7.2.RELEASE</spring-rabbit.version>
         
         <!-- dubbo dependences start -->
-		<xstream_version>1.4.1</xstream_version>
+		<xstream_version>1.4.17</xstream_version>
 		<netty_version>3.7.0.Final</netty_version>
 		<mina_version>1.1.7</mina_version>
 		<grizzly_version>2.1.4</grizzly_version>
