@@ -158,7 +158,7 @@
 		<easymock_version>3.0</easymock_version>
 		<jmockit_version>0.999.8</jmockit_version>
 		<tomcat_embed_version>8.0.11</tomcat_embed_version>
-		<resteasy_version>3.0.7.Final</resteasy_version>
+		<resteasy_version>4.5.7.Final</resteasy_version>
 		<javax.ws.rs-api_version>2.0</javax.ws.rs-api_version>
 		
 		<!-- for maven compiler plugin -->
