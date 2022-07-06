@@ -80,7 +80,7 @@
         <!-- 代码生成器 -->
         <codegenerate.version>3.4.6</codegenerate.version>
         <!-- camel-jasypt  -->
-        <jasypt.version>1.5</jasypt.version>
+        <jasypt.version>1.9.2</jasypt.version>
         <!-- 测试依赖包 -->
         <junit.version>4.10</junit.version>
         <!-- spring-data-redis -->
