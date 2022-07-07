@@ -91,7 +91,7 @@
 		<hibernate.version>4.1.0.Final</hibernate.version>
 		<hibernate-common-annotations.version>4.0.2.Final</hibernate-common-annotations.version>
 		<hibernate-jpa.version>1.0.1.Final</hibernate-jpa.version>
-		<hibernate-validator.version>4.2.0.Final</hibernate-validator.version>
+		<hibernate-validator.version>6.0.23.Final</hibernate-validator.version>
 		<!-- json start -->
 		<jackson.version>1.8.4</jackson.version>
 		<jacksonframework.version>1.84</jacksonframework.version>
