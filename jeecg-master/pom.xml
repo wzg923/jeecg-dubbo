@@ -88,7 +88,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<dubbo.version>2.8.4</dubbo.version>
 		<org.springframework.version>4.3.3.RELEASE</org.springframework.version>
-		<hibernate.version>4.1.0.Final</hibernate.version>
+		<hibernate.version>5.3.20.Final</hibernate.version>
 		<hibernate-common-annotations.version>4.0.2.Final</hibernate-common-annotations.version>
 		<hibernate-jpa.version>1.0.1.Final</hibernate-jpa.version>
 		<hibernate-validator.version>4.2.0.Final</hibernate-validator.version>
